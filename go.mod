@@ -1,0 +1,12 @@
+module github.com/mahipalpanwar-7/TODO-RestAPI-DB
+
+go 1.25.0
+
+require (
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
+	github.com/go-sql-driver/mysql v1.10.0
+	github.com/gorilla/mux v1.8.1
+	golang.org/x/crypto v0.51.0
+)
+
+require filippo.io/edwards25519 v1.2.0 // indirect
