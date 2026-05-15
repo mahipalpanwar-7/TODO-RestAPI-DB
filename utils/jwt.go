@@ -6,7 +6,7 @@ import (
 	"github.com/dgrijalva/jwt-go"
 )
 
-var jwtKey = []byte("my_jwt_secretkey")
+var JwtKey = []byte("my_secret_key")
 
 func GenerateJWT(email string) (string, error) {
 	expirationTime := time.Now().Add(1 * time.Hour)
@@ -21,7 +21,7 @@ func GenerateJWT(email string) (string, error) {
 		claims,
 	)
 
-	tokenString, err := token.SignedString(jwtKey)
+	tokenString, err := token.SignedString(JwtKey)
 	if err != nil {
 		return "", err
 	}
