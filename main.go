@@ -7,7 +7,6 @@ import (
 
 	"github.com/mahipalpanwar-7/TODO-RestAPI-DB/config"
 	"github.com/mahipalpanwar-7/TODO-RestAPI-DB/routes"
-	
 )
 
 func main() {
