@@ -40,7 +40,7 @@ func GetTodos(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(todos)
 }
 
-func AddTodo(w http.ResponseWriter, r *http.Response) {
+func AddTodo(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	var todo models.Todo
@@ -86,20 +86,20 @@ func CompleteTodo(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode("todo completed")
 }
 
-func DeleteTodo(w http.ResponseWriter, r *http.Request){
-	w.Header().Set("Content-Type","application/json")
+func DeleteTodo(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
 
-	params:= mux.Vars(r)
-	id,err:= strconv.Atoi(params["id"])
-	if err!=nil{
+	params := mux.Vars(r)
+	id, err := strconv.Atoi(params["id"])
+	if err != nil {
 		json.NewEncoder(w).Encode("invalid id")
 		return
 	}
 
-	query:= `DELETE FROM todos Where id=?`
+	query := `DELETE FROM todos Where id=?`
 
-	_,err = config.DB.Exec(query,id)
-    if err!=nil{
+	_, err = config.DB.Exec(query, id)
+	if err != nil {
 		json.NewEncoder(w).Encode(err.Error())
 		return
 	}
