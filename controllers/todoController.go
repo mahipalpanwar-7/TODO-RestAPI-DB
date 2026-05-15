@@ -74,16 +74,25 @@ func CompleteTodo(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.Atoi(params["id"])
 	if err != nil {
 		json.NewEncoder(w).Encode(err.Error())
+		return
+	}
+
+	var todo models.Todo
+	err = json.NewDecoder(r.Body).Decode(&todo)
+	if err != nil {
+		json.NewEncoder(w).Encode("Invalid JSON or is_completed must be true/false")
+		return
 	}
 
 	query := `UPDATE todos SET is_completed=? WHERE ID=?`
 
-	_, err = config.DB.Exec(query, true, id)
+	_, err = config.DB.Exec(query, todo.IsCompleted, id)
 	if err != nil {
 		json.NewEncoder(w).Encode(err.Error())
 		return
+	} else {
+		json.NewEncoder(w).Encode("todo completed")
 	}
-	json.NewEncoder(w).Encode("todo completed")
 }
 
 func DeleteTodo(w http.ResponseWriter, r *http.Request) {

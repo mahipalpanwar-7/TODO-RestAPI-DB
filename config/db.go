@@ -3,13 +3,14 @@ package config
 import (
 	"database/sql"
 	"fmt"
+
 	_ "github.com/go-sql-driver/mysql"
 )
 
 var DB *sql.DB
 
 func ConnectDB() {
-	dsn := ""
+	dsn := "root:mahi@mysql@1234@tcp(localhost:3306)/todoapp"
 
 	db, err := sql.Open("mysql", dsn)
 	if err != nil {
@@ -26,13 +27,13 @@ func ConnectDB() {
 	DB = db
 
 	CreateDatabase()
-	createUserTable()
-	createTodosTable()
+	CreateUserTable()
+	CreateTodosTable()
 
 }
 
 func CreateDatabase() {
-	query := `CREATE TABLE IF NOT EXISTS todoapp`
+	query := `CREATE DATABASE IF NOT EXISTS todoapp`
 	_, err := DB.Exec(query)
 
 	if err != nil {
@@ -41,7 +42,7 @@ func CreateDatabase() {
 	fmt.Println("database created successfully")
 }
 
-func createUserTable() {
+func CreateUserTable() {
 	query := `CREATE TABLE IF NOT EXISTS user(
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	username VARCHAR(100),
@@ -56,7 +57,7 @@ func createUserTable() {
 	fmt.Println("user table created successfully")
 }
 
-func createTodosTable() {
+func CreateTodosTable() {
 	query := `CREATE TABLE IF NOT EXISTS todos(
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	title VARCHAR(255),
@@ -67,6 +68,5 @@ func createTodosTable() {
 	if err != nil {
 		panic(err)
 	}
-   fmt.Println("todo table created successfully")
+	fmt.Println("todo table created successfully")
 }
-
