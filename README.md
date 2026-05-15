@@ -54,7 +54,8 @@ RESTAPI-MYSQL/
 │   └── authMiddleware.go
 │
 ├── models/
-│   └── userModel.go
+│   |── userModel.go
+|   └── todoModel.go
 │
 ├── routes/
 │   └── routes.go
