@@ -27,7 +27,7 @@ func Register(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	query := `INSERT INTO users(username,email,password)VALUES(?,?,?)`
+	query := `INSERT INTO user(username,email,password)VALUES(?,?,?)`
 
 	_, err = config.DB.Exec(
 		query,
@@ -52,7 +52,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 
 	query := `
 	SELECT id,username,email,password
-	FROM users
+	FROM user
 	WHERE email=?
 	`
 
