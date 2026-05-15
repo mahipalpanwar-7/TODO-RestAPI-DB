@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/dgrijalva/jwt-go"
+	"github.com/mahipalpanwar-7/TODO-RestAPI-DB/utils"
 )
 
 func AuthMiddleware(next http.Handler) http.Handler {
@@ -21,11 +22,11 @@ func AuthMiddleware(next http.Handler) http.Handler {
 			return
 		}
 
-		tokenString := strings.TrimPrefix(authHeader, "Bearer")
+		tokenString := strings.TrimPrefix(authHeader, "Bearer ")
 
 		token, err := jwt.Parse(
 			tokenString,
-			func(t *jwt.Token) (interface{}, error) {
+			func(token *jwt.Token) (interface{}, error) {
 				return utils.JwtKey, nil
 			},
 		)
