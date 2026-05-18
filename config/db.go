@@ -10,7 +10,7 @@ import (
 var DB *sql.DB
 
 func ConnectDB() {
-	dsn := "root:mahi@mysql@1234@tcp(localhost:3306)/todoapp"
+	dsn := "root:password@tcp(localhost:3306)/todoapp"
 
 	db, err := sql.Open("mysql", dsn)
 	if err != nil {
